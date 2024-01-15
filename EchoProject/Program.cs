@@ -12,7 +12,7 @@ app.Map("{**path}", async (HttpContext context) =>
 	{
 		Url = $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}",
 		Method = context.Request.Method,
-		UrlParts = context.Request.Path.Value?.Split('/'),
+		UrlParts = context.Request.Path.Value?.Split('/') ?? [],
 		Params = context.Request.Query.ToDictionary(x => x.Key, x => x.Value.ToString()),
 		Headers = context.Request.Headers.ToDictionary(x => x.Key, x => x.Value.ToString()),
 		Body = await new StreamReader(context.Request.Body).ReadToEndAsync()
